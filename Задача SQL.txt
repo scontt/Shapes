@@ -1,0 +1,14 @@
+В данной задаче 
+"Напишите SQL запрос для выбора всех пар «Имя продукта – Имя категории». Если у продукта нет категорий, то его имя все равно должно выводиться"
+имеется в базе данных соединение многие-ко-многим, поэтому нужно добавить еще одну таблицу для связи имеющихся
+
+Пусть мы имеем три таблицы Product, Category, Product_Categories - Продукты, Категории и Категории_Продуктов соответственно:
+Product ( Id (PK), Name ),
+Category ( Id (PK), Name ), 
+Product_Categories ( ProductId (PK, FK), CategoryId (PK, FK) )
+
+Тогда запрос на вывод пар Продукт-Категория может выглядеть так:
+	SELECT Product.Name as 'Продукт', Category.Name as 'Категория'
+	FROM Product_Categories
+	RIGHT JOIN Product ON Product_Categories.ProductId = Product.Id
+	LEFT JOIN Category ON Product_Categories.CategoryId = Category.Id;
